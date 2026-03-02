@@ -118,38 +118,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script para calcular total -->
-    <script>
-        function calcularTotal() {
-            let total = 0;
-
-            const produtos = document.querySelectorAll(".item-produto");
-
-            produtos.forEach(function (checkbox) {
-                if (checkbox.checked) {
-                    const preco = parseFloat(checkbox.value);
-                    const quantidade = parseInt(
-                        checkbox.closest(".card-body")
-                            .querySelector(".qtd-produto").value
-                    );
-
-                    total += preco * quantidade;
-                }
-            });
-
-            document.getElementById("valor-total").textContent =
-                total.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-        }
-
-        document.querySelectorAll(".item-produto, .qtd-produto")
-            .forEach(function (elemento) {
-                elemento.addEventListener("change", calcularTotal);
-            });
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
