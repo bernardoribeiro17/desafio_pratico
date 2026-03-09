@@ -1,185 +1,197 @@
+// =============================
+// CARRINHO COM LOCAL STORAGE
+// =============================
+
+// Se já existir carrinho salvo, carrega
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-function salvarCarrinho(){
+
+// Salva no Local Storage
+function salvarCarrinho() {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
 
-function adicionarCarrinho(nome, preco, quantidade){
 
-    const produtoExistente = carrinho.find(produto => produto.nome === nome);
+// Atualiza contador do carrinho na navbar
+function atualizarContador() {
 
-    if(produtoExistente){
-        produtoExistente.quantidade += quantidade;
-    }else{
-        carrinho.push({
-            nome: nome,
-            preco: preco,
-            quantidade: quantidade
-        });
-    }
-
-    salvarCarrinho();
-    atualizarCarrinho();
-    mostrarMensagem();
-}
-
-function alterarQuantidade(index, valor){
-
-    carrinho[index].quantidade += valor;
-
-    if(carrinho[index].quantidade <= 0){
-        carrinho.splice(index,1);
-    }
-
-    salvarCarrinho();
-    atualizarCarrinho();
-}
-
-function removerProduto(index){
-    carrinho.splice(index,1);
-    salvarCarrinho();
-    atualizarCarrinho();
-}
-
-function limparCarrinho(){
-    carrinho = [];
-    salvarCarrinho();
-    atualizarCarrinho();
-}
-
-function atualizarCarrinho(){
-
-    const lista = document.getElementById("lista-carrinho");
-    const totalSpan = document.getElementById("total-carrinho");
     const contador = document.getElementById("contador-carrinho");
 
-    if(!lista || !totalSpan) return;
+    if (!contador) return;
+
+    let totalItens = 0;
+
+    carrinho.forEach(item => {
+        totalItens += item.qtd;
+    });
+
+    contador.textContent = totalItens;
+}
+
+
+// Atualiza lista do carrinho na tela
+function atualizarCarrinho() {
+
+    const lista = document.getElementById("lista-carrinho");
+    const total = document.getElementById("total-carrinho");
+
+    if (!lista || !total) return;
 
     lista.innerHTML = "";
 
-    let total = 0;
-    let totalItens = 0;
+    let soma = 0;
 
-    carrinho.forEach((produto,index)=>{
-
-        const subtotal = produto.preco * produto.quantidade;
-
-        total += subtotal;
-        totalItens += produto.quantidade;
+    carrinho.forEach(item => {
 
         const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
 
-        li.className="list-group-item d-flex justify-content-between align-items-center";
+        const subtotal = item.preco * item.qtd;
+        soma += subtotal;
 
         li.innerHTML = `
-        <div>
-            <strong>${produto.nome}</strong><br>
-
-            <button class="btn btn-sm btn-secondary"
-            onclick="alterarQuantidade(${index},-1)">-</button>
-
-            ${produto.quantidade}
-
-            <button class="btn btn-sm btn-secondary"
-            onclick="alterarQuantidade(${index},1)">+</button>
-
-            <span class="ms-3">
-            R$ ${subtotal.toLocaleString("pt-BR",{
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            })}
-            </span>
-        </div>
-
-        <button class="btn btn-sm btn-danger"
-        onclick="removerProduto(${index})">
-        Remover
-        </button>
+            ${item.nome} (x${item.qtd})
+            <span>R$ ${subtotal.toFixed(2)}</span>
         `;
 
         lista.appendChild(li);
 
     });
 
-    totalSpan.textContent = total.toLocaleString("pt-BR",{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-    });
+    total.textContent = soma.toFixed(2);
 
-    if(contador){
-        contador.textContent = totalItens;
-    }
-
+    atualizarContador();
 }
 
-function mostrarMensagem(){
 
-    const alerta = document.createElement("div");
+// =============================
+// ADICIONAR PRODUTO
+// =============================
 
-    alerta.className = "alert alert-success position-fixed top-0 end-0 m-3";
+document.querySelectorAll(".btn-comprar").forEach(botao => {
 
-    alerta.innerText = "Produto adicionado ao carrinho!";
-
-    document.body.appendChild(alerta);
-
-    setTimeout(()=>{
-        alerta.remove();
-    },2000);
-
-}
-
-document.querySelectorAll(".btn-comprar").forEach(botao=>{
-
-    botao.addEventListener("click",function(){
+    botao.addEventListener("click", function () {
 
         const nome = this.dataset.nome;
         const preco = parseFloat(this.dataset.preco);
 
-        const quantidade = parseInt(
-            this.closest(".card-body")
-            .querySelector(".qtd-produto").value
-        );
+        const qtdInput = this.parentElement.querySelector(".qtd-produto");
+        const qtd = parseInt(qtdInput.value);
 
-        adicionarCarrinho(nome,preco,quantidade);
+        const produtoExistente = carrinho.find(item => item.nome === nome);
+
+        if (produtoExistente) {
+
+            produtoExistente.qtd += qtd;
+
+        } else {
+
+            carrinho.push({
+                nome: nome,
+                preco: preco,
+                qtd: qtd
+            });
+
+        }
+
+        salvarCarrinho();
+        atualizarCarrinho();
+
+        alert("Produto adicionado ao carrinho 🛒");
 
     });
 
 });
 
-atualizarCarrinho();
 
+// =============================
+// LIMPAR CARRINHO
+// =============================
 
-// ===============================
-// DEPOIMENTOS DA API
-// ===============================
+function limparCarrinho() {
 
-async function carregarDepoimentos(){
+    carrinho = [];
 
-    const resposta = await fetch("https://jsonplaceholder.typicode.com/comments?_limit=3");
+    salvarCarrinho();
 
-    const dados = await resposta.json();
-
-    const lista = document.getElementById("lista-depoimentos");
-
-    if(!lista) return;
-
-    lista.innerHTML="";
-
-    dados.forEach(depoimento=>{
-
-        lista.innerHTML += `
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h5>${depoimento.name}</h5>
-                    <h6 class="text-muted">${depoimento.email}</h6>
-                    <p>${depoimento.body}</p>
-                </div>
-            </div>
-        </div>
-        `;
-    });
+    atualizarCarrinho();
 
 }
 
+
+// =============================
+// FINALIZAR COMPRA
+// =============================
+
+function finalizarCompra() {
+
+    if (carrinho.length === 0) {
+
+        alert("Seu carrinho está vazio!");
+
+        return;
+
+    }
+
+    alert("Compra realizada com sucesso! 🛒");
+
+    carrinho = [];
+
+    salvarCarrinho();
+
+    atualizarCarrinho();
+
+}
+
+
+// =============================
+// DEPOIMENTOS API
+// =============================
+
+async function carregarDepoimentos() {
+
+    const container = document.getElementById("lista-depoimentos");
+
+    if (!container) return;
+
+    try {
+
+        const resposta = await fetch("https://jsonplaceholder.typicode.com/comments?_limit=3");
+
+        const dados = await resposta.json();
+
+        dados.forEach(depoimento => {
+
+            const div = document.createElement("div");
+
+            div.className = "col-md-4";
+
+            div.innerHTML = `
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h6 class="card-title">${depoimento.name}</h6>
+                        <p class="card-text">${depoimento.body}</p>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(div);
+
+        });
+
+    } catch (erro) {
+
+        container.innerHTML = "Erro ao carregar depoimentos.";
+
+    }
+
+}
+
+
+// =============================
+// INICIALIZAÇÃO
+// =============================
+
+atualizarCarrinho();
+atualizarContador();
 carregarDepoimentos();
