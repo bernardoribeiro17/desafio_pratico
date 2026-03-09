@@ -7,17 +7,15 @@ import {
     renderizarDepoimentos
 } from "./ui.js";
 
-
 // =============================
 // CARRINHO LOCAL STORAGE
 // =============================
 
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-function salvarCarrinho(){
+function salvarCarrinho() {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
-
 
 // =============================
 // ADICIONAR PRODUTO
@@ -25,7 +23,7 @@ function salvarCarrinho(){
 
 document.querySelectorAll(".btn-comprar").forEach(botao => {
 
-    botao.addEventListener("click", function(){
+    botao.addEventListener("click", function() {
 
         const nome = this.dataset.nome;
         const preco = parseFloat(this.dataset.preco);
@@ -35,18 +33,14 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
 
         const produtoExistente = carrinho.find(item => item.nome === nome);
 
-        if(produtoExistente){
-
+        if (produtoExistente) {
             produtoExistente.qtd += qtd;
-
-        }else{
-
+        } else {
             carrinho.push({
                 nome: nome,
                 preco: preco,
                 qtd: qtd
             });
-
         }
 
         salvarCarrinho();
@@ -60,14 +54,13 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
 
 });
 
-
 // =============================
 // FINALIZAR COMPRA
 // =============================
 
-window.finalizarCompra = function(){
+window.finalizarCompra = function() {
 
-    if(carrinho.length === 0){
+    if (carrinho.length === 0) {
         alert("Seu carrinho está vazio!");
         return;
     }
@@ -83,12 +76,11 @@ window.finalizarCompra = function(){
 
 }
 
-
 // =============================
 // LIMPAR CARRINHO
 // =============================
 
-window.limparCarrinho = function(){
+window.limparCarrinho = function() {
 
     carrinho = [];
 
@@ -99,16 +91,22 @@ window.limparCarrinho = function(){
 
 }
 
+// =============================
+// MODAL DE COMPRA (ABRIR AUTOMATICAMENTE)
+// =============================
+
+const modalCompra = new bootstrap.Modal(document.getElementById("modalCompra"));
+modalCompra.show(); // abre o modal de compra automaticamente
 
 // =============================
 // MODAL DE PRODUTO (DETALHES)
 // =============================
 
-const modal = document.getElementById("modalProduto");
+const modalProduto = document.getElementById("modalProduto");
 
-if(modal){
+if (modalProduto) {
 
-    modal.addEventListener("show.bs.modal", function(event){
+    modalProduto.addEventListener("show.bs.modal", function(event) {
 
         const botao = event.relatedTarget;
 
@@ -129,20 +127,19 @@ if(modal){
 
 }
 
-
 // =============================
 // CARREGAR DEPOIMENTOS
 // =============================
 
-async function carregarDepoimentos(){
+async function carregarDepoimentos() {
 
-    try{
+    try {
 
         const dados = await buscarDepoimentos();
 
         renderizarDepoimentos(dados);
 
-    }catch{
+    } catch {
 
         console.log("Erro ao carregar depoimentos");
 
@@ -150,16 +147,15 @@ async function carregarDepoimentos(){
 
 }
 
-
 // =============================
 // FORMULÁRIO
 // =============================
 
 const formulario = document.getElementById("form-contato");
 
-if(formulario){
+if (formulario) {
 
-    formulario.addEventListener("submit", async function(event){
+    formulario.addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
@@ -173,23 +169,23 @@ if(formulario){
             mensagem: mensagem
         };
 
-        try{
+        try {
 
             const resposta = await enviarFormulario(dados);
 
-            if(resposta.status === 201){
+            if (resposta.status === 201) {
 
                 mostrarAlerta("success", "Mensagem enviada com sucesso! ✅");
 
                 formulario.reset();
 
-            }else{
+            } else {
 
                 mostrarAlerta("danger", "Erro ao enviar mensagem.");
 
             }
 
-        }catch{
+        } catch {
 
             mostrarAlerta("danger", "Falha na conexão com o servidor.");
 
@@ -198,7 +194,6 @@ if(formulario){
     });
 
 }
-
 
 // =============================
 // INICIALIZAÇÃO
