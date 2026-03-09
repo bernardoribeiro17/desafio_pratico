@@ -1,5 +1,11 @@
-import {buscarDepoimentos,enviarFormulario} from "./api.js";
-import {atualizarCarrinho,atualizarContador,mostrarToast,mostrarAlerta,renderizarDepoimentos} from "./ui.js";
+import { buscarDepoimentos, enviarFormulario } from "./api.js";
+import {
+    atualizarCarrinho,
+    atualizarContador,
+    mostrarToast,
+    mostrarAlerta,
+    renderizarDepoimentos
+} from "./ui.js";
 
 
 // =============================
@@ -9,9 +15,7 @@ import {atualizarCarrinho,atualizarContador,mostrarToast,mostrarAlerta,renderiza
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 function salvarCarrinho(){
-
-    localStorage.setItem("carrinho",JSON.stringify(carrinho));
-
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
 
 
@@ -19,9 +23,9 @@ function salvarCarrinho(){
 // ADICIONAR PRODUTO
 // =============================
 
-document.querySelectorAll(".btn-comprar").forEach(botao=>{
+document.querySelectorAll(".btn-comprar").forEach(botao => {
 
-    botao.addEventListener("click",function(){
+    botao.addEventListener("click", function(){
 
         const nome = this.dataset.nome;
         const preco = parseFloat(this.dataset.preco);
@@ -29,7 +33,7 @@ document.querySelectorAll(".btn-comprar").forEach(botao=>{
         const qtdInput = this.parentElement.querySelector(".qtd-produto");
         const qtd = parseInt(qtdInput.value);
 
-        const produtoExistente = carrinho.find(item=>item.nome === nome);
+        const produtoExistente = carrinho.find(item => item.nome === nome);
 
         if(produtoExistente){
 
@@ -38,9 +42,9 @@ document.querySelectorAll(".btn-comprar").forEach(botao=>{
         }else{
 
             carrinho.push({
-                nome:nome,
-                preco:preco,
-                qtd:qtd
+                nome: nome,
+                preco: preco,
+                qtd: qtd
             });
 
         }
@@ -61,18 +65,16 @@ document.querySelectorAll(".btn-comprar").forEach(botao=>{
 // FINALIZAR COMPRA
 // =============================
 
-window.finalizarCompra=function(){
+window.finalizarCompra = function(){
 
-    if(carrinho.length===0){
-
+    if(carrinho.length === 0){
         alert("Seu carrinho está vazio!");
         return;
-
     }
 
     alert("Compra realizada com sucesso!");
 
-    carrinho=[];
+    carrinho = [];
 
     salvarCarrinho();
 
@@ -86,14 +88,44 @@ window.finalizarCompra=function(){
 // LIMPAR CARRINHO
 // =============================
 
-window.limparCarrinho=function(){
+window.limparCarrinho = function(){
 
-    carrinho=[];
+    carrinho = [];
 
     salvarCarrinho();
 
     atualizarCarrinho(carrinho);
     atualizarContador(carrinho);
+
+}
+
+
+// =============================
+// MODAL DE PRODUTO (DETALHES)
+// =============================
+
+const modal = document.getElementById("modalProduto");
+
+if(modal){
+
+    modal.addEventListener("show.bs.modal", function(event){
+
+        const botao = event.relatedTarget;
+
+        const nome = botao.getAttribute("data-nome");
+        const descricao = botao.getAttribute("data-descricao");
+        const preco = botao.getAttribute("data-preco");
+
+        document.getElementById("modalTitulo").textContent = nome;
+
+        document.getElementById("modalDescricao").textContent = descricao;
+
+        document.getElementById("modalPreco").textContent =
+            "R$ " + parseFloat(preco).toLocaleString("pt-BR", {
+                minimumFractionDigits: 2
+            });
+
+    });
 
 }
 
@@ -127,39 +159,39 @@ const formulario = document.getElementById("form-contato");
 
 if(formulario){
 
-    formulario.addEventListener("submit",async function(event){
+    formulario.addEventListener("submit", async function(event){
 
         event.preventDefault();
 
-        const nome=document.getElementById("nome").value;
-        const email=document.getElementById("email").value;
-        const mensagem=document.getElementById("mensagem").value;
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const mensagem = document.getElementById("mensagem").value;
 
-        const dados={
-            nome:nome,
-            email:email,
-            mensagem:mensagem
+        const dados = {
+            nome: nome,
+            email: email,
+            mensagem: mensagem
         };
 
         try{
 
             const resposta = await enviarFormulario(dados);
 
-            if(resposta.status===201){
+            if(resposta.status === 201){
 
-                mostrarAlerta("success","Mensagem enviada com sucesso! ✅");
+                mostrarAlerta("success", "Mensagem enviada com sucesso! ✅");
 
                 formulario.reset();
 
             }else{
 
-                mostrarAlerta("danger","Erro ao enviar mensagem.");
+                mostrarAlerta("danger", "Erro ao enviar mensagem.");
 
             }
 
         }catch{
 
-            mostrarAlerta("danger","Falha na conexão com o servidor.");
+            mostrarAlerta("danger", "Falha na conexão com o servidor.");
 
         }
 
