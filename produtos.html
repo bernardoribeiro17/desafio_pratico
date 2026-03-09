@@ -10,10 +10,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+
 .img-produto{
 height:200px;
 object-fit:cover;
 }
+
 </style>
 
 </head>
@@ -72,13 +74,15 @@ Carrinho 🛒
 
 <div class="row g-4">
 
+
 <!-- PRODUTO 1 -->
 
 <div class="col-md-4">
 
 <div class="card h-100 shadow">
 
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
+<img
+src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
 class="card-img-top img-produto">
 
 <div class="card-body">
@@ -93,7 +97,11 @@ R$ 2.500,00
 
 <label class="form-label">Quantidade</label>
 
-<input type="number" class="form-control qtd-produto" value="1" min="1">
+<input
+type="number"
+class="form-control qtd-produto"
+value="1"
+min="1">
 
 <button
 class="btn btn-success mt-3 w-100 btn-comprar"
@@ -117,7 +125,8 @@ Adicionar ao Carrinho
 
 <div class="card h-100 shadow">
 
-<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600"
+<img
+src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600"
 class="card-img-top img-produto">
 
 <div class="card-body">
@@ -132,7 +141,11 @@ R$ 4.500,00
 
 <label class="form-label">Quantidade</label>
 
-<input type="number" class="form-control qtd-produto" value="1" min="1">
+<input
+type="number"
+class="form-control qtd-produto"
+value="1"
+min="1">
 
 <button
 class="btn btn-success mt-3 w-100 btn-comprar"
@@ -156,7 +169,8 @@ Adicionar ao Carrinho
 
 <div class="card h-100 shadow">
 
-<img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
+<img
+src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
 class="card-img-top img-produto">
 
 <div class="card-body">
@@ -171,7 +185,11 @@ R$ 350,00
 
 <label class="form-label">Quantidade</label>
 
-<input type="number" class="form-control qtd-produto" value="1" min="1">
+<input
+type="number"
+class="form-control qtd-produto"
+value="1"
+min="1">
 
 <button
 class="btn btn-success mt-3 w-100 btn-comprar"
@@ -237,6 +255,31 @@ Limpar Carrinho
 </div>
 
 
+<!-- TOAST BOOTSTRAP -->
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:11">
+
+<div id="toastCarrinho" class="toast align-items-center text-bg-success border-0">
+
+<div class="d-flex">
+
+<div class="toast-body">
+Produto adicionado ao carrinho 🛒
+</div>
+
+<button
+type="button"
+class="btn-close btn-close-white me-2 m-auto"
+data-bs-dismiss="toast">
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
 <!-- FOOTER -->
 
 <footer class="bg-dark text-white text-center p-3 mt-5">
@@ -245,6 +288,8 @@ Limpar Carrinho
 
 </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="script.js"></script>
 
