@@ -2,139 +2,216 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Produtos</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Produtos</title>
 
-    <style>
-        .img-produto {
-            height: 200px;
-            object-fit: cover;
-        }
-    </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.img-produto{
+height:200px;
+object-fit:cover;
+}
+</style>
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">TechStore</a>
+<!-- NAVBAR -->
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="produtos.html">Produtos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contato.html">Contato</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div class="container">
 
-    <!-- Produtos -->
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Nossos Produtos</h2>
+<a class="navbar-brand" href="#">TechStore</a>
 
-        <div class="row g-4">
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-            <!-- Produto 1 -->
-            <div class="col-12 col-md-4">
-                <div class="card h-100 shadow">
-                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
-                        class="card-img-top img-produto"
-                        alt="Smartphone XPro">
+<div class="collapse navbar-collapse" id="menu">
 
-                    <div class="card-body">
-                        <h5>Smartphone XPro</h5>
-                        <p>Tela AMOLED 6.5", 128GB, câmera 50MP.</p>
-                        <p class="fw-bold">R$ 2.500,00</p>
+<ul class="navbar-nav ms-auto">
 
-                        <div class="form-check">
-                            <input class="form-check-input item-produto" type="checkbox" id="produto1" value="2500.00">
-                            <label class="form-check-label" for="produto1">Selecionar produto</label>
-                        </div>
+<li class="nav-item">
+<a class="nav-link" href="index.html">Home</a>
+</li>
 
-                        <label class="form-label mt-2">Quantidade</label>
-                        <input type="number" class="form-control qtd-produto" value="1" min="1">
-                    </div>
-                </div>
-            </div>
+<li class="nav-item">
+<a class="nav-link active" href="produtos.html">Produtos</a>
+</li>
 
-            <!-- Produto 2 -->
-            <div class="col-12 col-md-4">
-                <div class="card h-100 shadow">
-                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600"
-                        class="card-img-top img-produto"
-                        alt="Notebook UltraTech">
+<li class="nav-item">
+<a class="nav-link" href="contato.html">Contato</a>
+</li>
 
-                    <div class="card-body">
-                        <h5>Notebook UltraTech</h5>
-                        <p>i7, 16GB RAM, SSD 512GB.</p>
-                        <p class="fw-bold">R$ 4.500,00</p>
+</ul>
 
-                        <div class="form-check">
-                            <input class="form-check-input item-produto" type="checkbox" id="produto2" value="4500.00">
-                            <label class="form-check-label" for="produto2">Selecionar produto</label>
-                        </div>
+</div>
 
-                        <label class="form-label mt-2">Quantidade</label>
-                        <input type="number" class="form-control qtd-produto" value="1" min="1">
-                    </div>
-                </div>
-            </div>
+</div>
 
-            <!-- Produto 3 -->
-            <div class="col-12 col-md-4">
-                <div class="card h-100 shadow">
-                    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
-                        class="card-img-top img-produto"
-                        alt="Fone Bluetooth Pro">
+</nav>
 
-                    <div class="card-body">
-                        <h5>Fone Bluetooth Pro</h5>
-                        <p>Cancelamento de ruído ativo, bateria 30h.</p>
-                        <p class="fw-bold">R$ 350,00</p>
 
-                        <div class="form-check">
-                            <input class="form-check-input item-produto" type="checkbox" id="produto3" value="350.00">
-                            <label class="form-check-label" for="produto3">Selecionar produto</label>
-                        </div>
+<!-- PRODUTOS -->
 
-                        <label class="form-label mt-2">Quantidade</label>
-                        <input type="number" class="form-control qtd-produto" value="1" min="1">
-                    </div>
-                </div>
-            </div>
+<div class="container mt-5">
 
-        </div>
-    </div>
+<h2 class="text-center mb-4">Nossos Produtos</h2>
 
-    <!-- Valor Total -->
-    <div class="container mt-4">
-        <div class="alert alert-info text-center fs-4">
-            <strong>Valor Total: R$ <span id="valor-total">0,00</span></strong>
-        </div>
-    </div>
+<div class="row g-4">
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white text-center p-3 mt-5">
-        © 2026 TechStore - Todos os direitos reservados
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+<!-- PRODUTO 1 -->
+
+<div class="col-12 col-md-4">
+
+<div class="card h-100 shadow">
+
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
+class="card-img-top img-produto">
+
+<div class="card-body">
+
+<h5>Smartphone XPro</h5>
+
+<p>Tela AMOLED 6.5", 128GB, câmera 50MP.</p>
+
+<p class="fw-bold">R$ 2.500,00</p>
+
+<label class="form-label">Quantidade</label>
+
+<input type="number" class="form-control qtd-produto" value="1" min="1">
+
+<button
+class="btn btn-success mt-3 btn-comprar"
+data-nome="Smartphone XPro"
+data-preco="2500">
+
+Adicionar ao Carrinho
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUTO 2 -->
+
+<div class="col-12 col-md-4">
+
+<div class="card h-100 shadow">
+
+<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600"
+class="card-img-top img-produto">
+
+<div class="card-body">
+
+<h5>Notebook UltraTech</h5>
+
+<p>i7, 16GB RAM, SSD 512GB.</p>
+
+<p class="fw-bold">R$ 4.500,00</p>
+
+<label class="form-label">Quantidade</label>
+
+<input type="number" class="form-control qtd-produto" value="1" min="1">
+
+<button
+class="btn btn-success mt-3 btn-comprar"
+data-nome="Notebook UltraTech"
+data-preco="4500">
+
+Adicionar ao Carrinho
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUTO 3 -->
+
+<div class="col-12 col-md-4">
+
+<div class="card h-100 shadow">
+
+<img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
+class="card-img-top img-produto">
+
+<div class="card-body">
+
+<h5>Fone Bluetooth Pro</h5>
+
+<p>Cancelamento de ruído ativo, bateria 30h.</p>
+
+<p class="fw-bold">R$ 350,00</p>
+
+<label class="form-label">Quantidade</label>
+
+<input type="number" class="form-control qtd-produto" value="1" min="1">
+
+<button
+class="btn btn-success mt-3 btn-comprar"
+data-nome="Fone Bluetooth Pro"
+data-preco="350">
+
+Adicionar ao Carrinho
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CARRINHO -->
+
+<div class="container mt-5">
+
+<h3>Carrinho de Compras</h3>
+
+<ul class="list-group mb-3" id="lista-carrinho"></ul>
+
+<div class="alert alert-info">
+
+<strong>Total: R$ <span id="total-carrinho">0,00</span></strong>
+
+</div>
+
+<button class="btn btn-danger" onclick="limparCarrinho()">
+Limpar Carrinho
+</button>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="bg-dark text-white text-center p-3 mt-5">
+
+© 2026 TechStore - Todos os direitos reservados
+
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
