@@ -2,17 +2,17 @@
 // CARRINHO COM LOCAL STORAGE
 // =============================
 
-// Se já existir carrinho salvo, carrega
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-
-// Salva no Local Storage
 function salvarCarrinho() {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
 
 
-// Atualiza contador do carrinho na navbar
+// =============================
+// CONTADOR DO CARRINHO
+// =============================
+
 function atualizarContador() {
 
     const contador = document.getElementById("contador-carrinho");
@@ -29,7 +29,10 @@ function atualizarContador() {
 }
 
 
-// Atualiza lista do carrinho na tela
+// =============================
+// ATUALIZAR CARRINHO NA TELA
+// =============================
+
 function atualizarCarrinho() {
 
     const lista = document.getElementById("lista-carrinho");
@@ -44,21 +47,26 @@ function atualizarCarrinho() {
     carrinho.forEach(item => {
 
         const li = document.createElement("li");
+
         li.className = "list-group-item d-flex justify-content-between align-items-center";
 
         const subtotal = item.preco * item.qtd;
+
         soma += subtotal;
 
         li.innerHTML = `
             ${item.nome} (x${item.qtd})
-            <span>R$ ${subtotal.toFixed(2)}</span>
+            <span>R$ ${subtotal.toLocaleString("pt-BR", {minimumFractionDigits:2})}</span>
         `;
 
         lista.appendChild(li);
 
     });
 
-    total.textContent = soma.toFixed(2);
+    total.textContent = soma.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 
     atualizarContador();
 }
@@ -97,7 +105,7 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
         salvarCarrinho();
         atualizarCarrinho();
 
-        alert("Produto adicionado ao carrinho 🛒");
+        mostrarToast();
 
     });
 
@@ -105,10 +113,27 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
 
 
 // =============================
+// TOAST BOOTSTRAP
+// =============================
+
+function mostrarToast(){
+
+    const toastElemento = document.getElementById("toastCarrinho");
+
+    if(!toastElemento) return;
+
+    const toast = new bootstrap.Toast(toastElemento);
+
+    toast.show();
+
+}
+
+
+// =============================
 // LIMPAR CARRINHO
 // =============================
 
-function limparCarrinho() {
+function limparCarrinho(){
 
     carrinho = [];
 
@@ -123,9 +148,9 @@ function limparCarrinho() {
 // FINALIZAR COMPRA
 // =============================
 
-function finalizarCompra() {
+function finalizarCompra(){
 
-    if (carrinho.length === 0) {
+    if(carrinho.length === 0){
 
         alert("Seu carrinho está vazio!");
 
@@ -148,13 +173,13 @@ function finalizarCompra() {
 // DEPOIMENTOS API
 // =============================
 
-async function carregarDepoimentos() {
+async function carregarDepoimentos(){
 
     const container = document.getElementById("lista-depoimentos");
 
-    if (!container) return;
+    if(!container) return;
 
-    try {
+    try{
 
         const resposta = await fetch("https://jsonplaceholder.typicode.com/comments?_limit=3");
 
@@ -179,7 +204,7 @@ async function carregarDepoimentos() {
 
         });
 
-    } catch (erro) {
+    }catch(erro){
 
         container.innerHTML = "Erro ao carregar depoimentos.";
 
