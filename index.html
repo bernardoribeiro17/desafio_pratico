@@ -2,88 +2,133 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lançamento Oficial</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>TechStore - Lançamento Oficial</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">TechStore</a>
+<!-- NAVBAR -->
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
 
-            <div class="collapse navbar-collapse" id="menu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="produtos.html">Produtos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contato.html">Contato</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div class="container">
 
-    <!-- Hero Section -->
-    <div class="container text-center mt-5">
-        <h1 class="display-4 text-primary fw-bold">Lançamento Oficial</h1>
-        <p class="lead mt-3">
-            Conheça o nosso novo produto inovador, desenvolvido para oferecer
-            tecnologia, qualidade e desempenho incomparáveis.
-        </p>
+<a class="navbar-brand fw-bold" href="index.html">TechStore</a>
 
-        <a href="produtos.html" class="btn btn-primary btn-lg mt-3">
-            Ver Produtos
-        </a>
-    </div>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
 
-    <!-- Seção de Benefícios -->
-    <div class="container mt-5">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <h4>🚀 Tecnologia</h4>
-                <p>Produtos modernos com alto desempenho.</p>
-            </div>
-            <div class="col-md-4">
-                <h4>🔒 Segurança</h4>
-                <p>Garantia e confiabilidade em cada compra.</p>
-            </div>
-            <div class="col-md-4">
-                <h4>💎 Qualidade</h4>
-                <p>Materiais premium e acabamento impecável.</p>
-            </div>
-        </div>
-    </div>
+<div class="collapse navbar-collapse" id="menu">
 
-    <!-- Seção de Depoimentos -->
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">O que nossos clientes dizem</h2>
+<ul class="navbar-nav ms-auto">
 
-        <div class="row" id="lista-depoimentos">
-            <!-- O JavaScript irá preencher os depoimentos aqui -->
-        </div>
-    </div>
+<li class="nav-item">
+<a class="nav-link active" href="index.html">Home</a>
+</li>
 
-    <!-- Footer -->
-    <footer class="bg-light text-center p-3 mt-5">
-        © 2026 TechStore - Todos os direitos reservados
-    </footer>
+<li class="nav-item">
+<a class="nav-link" href="produtos.html">Produtos</a>
+</li>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+<li class="nav-item">
+<a class="nav-link" href="contato.html">Contato</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="produtos.html">
+Carrinho 🛒 
+<span class="badge bg-danger" id="contador-carrinho">0</span>
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<div class="container text-center mt-5">
+
+<h1 class="display-4 text-primary fw-bold">
+Lançamento Oficial
+</h1>
+
+<p class="lead mt-3">
+Conheça o nosso novo produto inovador, desenvolvido para oferecer
+tecnologia, qualidade e desempenho incomparáveis.
+</p>
+
+<a href="produtos.html" class="btn btn-primary btn-lg mt-3">
+Ver Produtos
+</a>
+
+</div>
+
+
+<!-- BENEFÍCIOS -->
+
+<div class="container mt-5">
+
+<div class="row text-center">
+
+<div class="col-md-4">
+<h4>🚀 Tecnologia</h4>
+<p>Produtos modernos com alto desempenho.</p>
+</div>
+
+<div class="col-md-4">
+<h4>🔒 Segurança</h4>
+<p>Garantia e confiabilidade em cada compra.</p>
+</div>
+
+<div class="col-md-4">
+<h4>💎 Qualidade</h4>
+<p>Materiais premium e acabamento impecável.</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DEPOIMENTOS -->
+
+<div class="container mt-5">
+
+<h2 class="text-center mb-4">
+O que nossos clientes dizem
+</h2>
+
+<div class="row" id="lista-depoimentos">
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="bg-light text-center p-3 mt-5">
+
+© 2026 TechStore - Todos os direitos reservados
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
