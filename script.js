@@ -56,8 +56,13 @@ function atualizarCarrinho(){
         total += subtotal;
 
         li.innerHTML = `
-        ${produto.nome} (x${produto.quantidade}) - 
-        R$ ${subtotal.toFixed(2)}
+        <span>
+        ${produto.nome} (x${produto.quantidade}) -
+        <strong>R$ ${subtotal.toLocaleString("pt-BR",{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        })}</strong>
+        </span>
 
         <button class="btn btn-sm btn-danger"
         onclick="removerProduto(${index})">
@@ -126,7 +131,6 @@ async function carregarDepoimentos(){
             </div>
         </div>
         `;
-
     });
 
 }
