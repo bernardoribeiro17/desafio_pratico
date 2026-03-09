@@ -13,62 +13,61 @@ function salvarCarrinho() {
 // CONTADOR DO CARRINHO
 // =============================
 
-function atualizarContador() {
+function atualizarContador(){
 
     const contador = document.getElementById("contador-carrinho");
 
-    if (!contador) return;
+    if(!contador) return;
 
-    let totalItens = 0;
+    let total = 0;
 
-    carrinho.forEach(item => {
-        totalItens += item.qtd;
+    carrinho.forEach(item=>{
+        total += item.qtd;
     });
 
-    contador.textContent = totalItens;
+    contador.textContent = total;
+
 }
 
 
 // =============================
-// ATUALIZAR CARRINHO NA TELA
+// ATUALIZAR CARRINHO
 // =============================
 
-function atualizarCarrinho() {
+function atualizarCarrinho(){
 
     const lista = document.getElementById("lista-carrinho");
     const total = document.getElementById("total-carrinho");
 
-    if (!lista || !total) return;
+    if(!lista || !total) return;
 
-    lista.innerHTML = "";
+    lista.innerHTML="";
 
     let soma = 0;
 
-    carrinho.forEach(item => {
+    carrinho.forEach(item=>{
 
         const li = document.createElement("li");
 
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.className="list-group-item d-flex justify-content-between align-items-center";
 
         const subtotal = item.preco * item.qtd;
 
         soma += subtotal;
 
-        li.innerHTML = `
-            ${item.nome} (x${item.qtd})
-            <span>R$ ${subtotal.toLocaleString("pt-BR", {minimumFractionDigits:2})}</span>
+        li.innerHTML=`
+        ${item.nome} (x${item.qtd})
+        <span>R$ ${subtotal.toLocaleString("pt-BR",{minimumFractionDigits:2})}</span>
         `;
 
         lista.appendChild(li);
 
     });
 
-    total.textContent = soma.toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
+    total.textContent = soma.toLocaleString("pt-BR",{minimumFractionDigits:2});
 
     atualizarContador();
+
 }
 
 
@@ -76,9 +75,9 @@ function atualizarCarrinho() {
 // ADICIONAR PRODUTO
 // =============================
 
-document.querySelectorAll(".btn-comprar").forEach(botao => {
+document.querySelectorAll(".btn-comprar").forEach(botao=>{
 
-    botao.addEventListener("click", function () {
+    botao.addEventListener("click",function(){
 
         const nome = this.dataset.nome;
         const preco = parseFloat(this.dataset.preco);
@@ -86,18 +85,18 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
         const qtdInput = this.parentElement.querySelector(".qtd-produto");
         const qtd = parseInt(qtdInput.value);
 
-        const produtoExistente = carrinho.find(item => item.nome === nome);
+        const produtoExistente = carrinho.find(item=>item.nome === nome);
 
-        if (produtoExistente) {
+        if(produtoExistente){
 
             produtoExistente.qtd += qtd;
 
-        } else {
+        }else{
 
             carrinho.push({
-                nome: nome,
-                preco: preco,
-                qtd: qtd
+                nome:nome,
+                preco:preco,
+                qtd:qtd
             });
 
         }
@@ -130,21 +129,6 @@ function mostrarToast(){
 
 
 // =============================
-// LIMPAR CARRINHO
-// =============================
-
-function limparCarrinho(){
-
-    carrinho = [];
-
-    salvarCarrinho();
-
-    atualizarCarrinho();
-
-}
-
-
-// =============================
 // FINALIZAR COMPRA
 // =============================
 
@@ -158,9 +142,24 @@ function finalizarCompra(){
 
     }
 
-    alert("Compra realizada com sucesso! 🛒");
+    alert("Compra realizada com sucesso!");
 
-    carrinho = [];
+    carrinho=[];
+
+    salvarCarrinho();
+
+    atualizarCarrinho();
+
+}
+
+
+// =============================
+// LIMPAR CARRINHO
+// =============================
+
+function limparCarrinho(){
+
+    carrinho=[];
 
     salvarCarrinho();
 
@@ -185,19 +184,26 @@ async function carregarDepoimentos(){
 
         const dados = await resposta.json();
 
-        dados.forEach(depoimento => {
+        dados.forEach(depoimento=>{
 
-            const div = document.createElement("div");
+            const div=document.createElement("div");
 
-            div.className = "col-md-4";
+            div.className="col-md-4";
 
-            div.innerHTML = `
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <h6 class="card-title">${depoimento.name}</h6>
-                        <p class="card-text">${depoimento.body}</p>
-                    </div>
-                </div>
+            div.innerHTML=`
+
+            <div class="card shadow-sm">
+
+            <div class="card-body">
+
+            <h6>${depoimento.name}</h6>
+
+            <p>${depoimento.body}</p>
+
+            </div>
+
+            </div>
+
             `;
 
             container.appendChild(div);
@@ -206,9 +212,98 @@ async function carregarDepoimentos(){
 
     }catch(erro){
 
-        container.innerHTML = "Erro ao carregar depoimentos.";
+        container.innerHTML="Erro ao carregar depoimentos.";
 
     }
+
+}
+
+
+// =============================
+// FORMULÁRIO DE CONTATO
+// =============================
+
+const formulario = document.getElementById("form-contato");
+
+if(formulario){
+
+    formulario.addEventListener("submit", async function(event){
+
+        event.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+        const mensagem = document.getElementById("mensagem").value;
+
+        const dados = {
+
+            nome:nome,
+            email:email,
+            mensagem:mensagem
+
+        };
+
+        try{
+
+            const resposta = await fetch("https://jsonplaceholder.typicode.com/posts",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(dados)
+
+            });
+
+            const alerta = document.getElementById("alerta-form");
+
+            if(resposta.status === 201){
+
+                alerta.innerHTML=`
+
+                <div class="alert alert-success mt-3">
+
+                Mensagem enviada com sucesso! ✅
+
+                </div>
+
+                `;
+
+                formulario.reset();
+
+            }else{
+
+                alerta.innerHTML=`
+
+                <div class="alert alert-danger mt-3">
+
+                Erro ao enviar mensagem.
+
+                </div>
+
+                `;
+
+            }
+
+        }catch(erro){
+
+            const alerta = document.getElementById("alerta-form");
+
+            alerta.innerHTML=`
+
+            <div class="alert alert-danger mt-3">
+
+            Falha na conexão com o servidor.
+
+            </div>
+
+            `;
+
+        }
+
+    });
 
 }
 
