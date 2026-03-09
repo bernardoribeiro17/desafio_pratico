@@ -2,18 +2,21 @@
 <html lang="pt-br">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Produtos</title>
+<title>TechStore - Produtos</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+
 .img-produto{
 height:200px;
 object-fit:cover;
 }
+
 </style>
 
 </head>
@@ -26,7 +29,7 @@ object-fit:cover;
 
 <div class="container">
 
-<a class="navbar-brand" href="#">TechStore</a>
+<a class="navbar-brand fw-bold" href="index.html">TechStore</a>
 
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
 <span class="navbar-toggler-icon"></span>
@@ -46,6 +49,13 @@ object-fit:cover;
 
 <li class="nav-item">
 <a class="nav-link" href="contato.html">Contato</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#carrinho">
+Carrinho 🛒
+<span class="badge bg-danger" id="contador-carrinho">0</span>
+</a>
 </li>
 
 </ul>
@@ -68,11 +78,12 @@ object-fit:cover;
 
 <!-- PRODUTO 1 -->
 
-<div class="col-12 col-md-4">
+<div class="col-md-4">
 
 <div class="card h-100 shadow">
 
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
+<img
+src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
 class="card-img-top img-produto">
 
 <div class="card-body">
@@ -81,14 +92,20 @@ class="card-img-top img-produto">
 
 <p>Tela AMOLED 6.5", 128GB, câmera 50MP.</p>
 
-<p class="fw-bold">R$ 2.500,00</p>
+<p class="fw-bold text-success">
+R$ 2.500,00
+</p>
 
 <label class="form-label">Quantidade</label>
 
-<input type="number" class="form-control qtd-produto" value="1" min="1">
+<input
+type="number"
+class="form-control qtd-produto"
+value="1"
+min="1">
 
 <button
-class="btn btn-success mt-3 btn-comprar"
+class="btn btn-success mt-3 w-100 btn-comprar"
 data-nome="Smartphone XPro"
 data-preco="2500">
 
@@ -105,11 +122,12 @@ Adicionar ao Carrinho
 
 <!-- PRODUTO 2 -->
 
-<div class="col-12 col-md-4">
+<div class="col-md-4">
 
 <div class="card h-100 shadow">
 
-<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600"
+<img
+src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600"
 class="card-img-top img-produto">
 
 <div class="card-body">
@@ -118,14 +136,20 @@ class="card-img-top img-produto">
 
 <p>i7, 16GB RAM, SSD 512GB.</p>
 
-<p class="fw-bold">R$ 4.500,00</p>
+<p class="fw-bold text-success">
+R$ 4.500,00
+</p>
 
 <label class="form-label">Quantidade</label>
 
-<input type="number" class="form-control qtd-produto" value="1" min="1">
+<input
+type="number"
+class="form-control qtd-produto"
+value="1"
+min="1">
 
 <button
-class="btn btn-success mt-3 btn-comprar"
+class="btn btn-success mt-3 w-100 btn-comprar"
 data-nome="Notebook UltraTech"
 data-preco="4500">
 
@@ -142,11 +166,12 @@ Adicionar ao Carrinho
 
 <!-- PRODUTO 3 -->
 
-<div class="col-12 col-md-4">
+<div class="col-md-4">
 
 <div class="card h-100 shadow">
 
-<img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
+<img
+src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600"
 class="card-img-top img-produto">
 
 <div class="card-body">
@@ -155,14 +180,20 @@ class="card-img-top img-produto">
 
 <p>Cancelamento de ruído ativo, bateria 30h.</p>
 
-<p class="fw-bold">R$ 350,00</p>
+<p class="fw-bold text-success">
+R$ 350,00
+</p>
 
 <label class="form-label">Quantidade</label>
 
-<input type="number" class="form-control qtd-produto" value="1" min="1">
+<input
+type="number"
+class="form-control qtd-produto"
+value="1"
+min="1">
 
 <button
-class="btn btn-success mt-3 btn-comprar"
+class="btn btn-success mt-3 w-100 btn-comprar"
 data-nome="Fone Bluetooth Pro"
 data-preco="350">
 
@@ -176,6 +207,7 @@ Adicionar ao Carrinho
 
 </div>
 
+
 </div>
 
 </div>
@@ -183,11 +215,16 @@ Adicionar ao Carrinho
 
 <!-- CARRINHO -->
 
-<div class="container mt-5">
+<div class="container mt-5" id="carrinho">
 
-<h3 class="mb-4">Carrinho de Compras</h3>
+<h3 class="mb-4">
+Carrinho de Compras
+</h3>
 
-<ul class="list-group shadow-sm mb-3" id="lista-carrinho"></ul>
+<ul
+class="list-group shadow-sm mb-3"
+id="lista-carrinho">
+</ul>
 
 <div class="d-flex justify-content-between align-items-center alert alert-info">
 
@@ -195,8 +232,12 @@ Adicionar ao Carrinho
 Total: R$ <span id="total-carrinho">0,00</span>
 </h5>
 
-<button class="btn btn-danger btn-sm" onclick="limparCarrinho()">
+<button
+class="btn btn-danger btn-sm"
+onclick="limparCarrinho()">
+
 Limpar Carrinho
+
 </button>
 
 </div>
