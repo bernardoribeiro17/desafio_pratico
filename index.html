@@ -2,10 +2,8 @@
 <html lang="pt-br">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>TechStore - Lançamento Oficial</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -15,7 +13,6 @@
     min-height: 150px;
 }
 </style>
-
 </head>
 
 <body>
@@ -72,7 +69,7 @@ tecnologia, qualidade e desempenho incomparáveis.
 </div>
 </div>
 
-<!-- DEPOIMENTOS FIXOS -->
+<!-- DEPOIMENTOS -->
 <div class="container mt-5">
 <h2 class="text-center mb-4">O que nossos clientes dizem</h2>
 <div class="row g-4">
@@ -107,11 +104,53 @@ tecnologia, qualidade e desempenho incomparáveis.
 </div>
 </div>
 
+<!-- MODAL PRODUTO -->
+<div class="modal fade" id="modalProduto" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="modalTitulo"></h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body" id="modalDescricao"></div>
+<div class="modal-footer">
+<span class="fw-bold text-success" id="modalPreco"></span>
+<button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+</div>
+</div>
+</div>
+</div>
+
 <!-- FOOTER -->
 <footer class="bg-light text-center p-3 mt-5">
 © 2026 TechStore - Todos os direitos reservados
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SCRIPT COM MÓDULOS -->
+<script type="module">
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Modal de Produto
+    const modalProduto = document.getElementById("modalProduto");
+
+    if (modalProduto) {
+        modalProduto.addEventListener("show.bs.modal", function(event) {
+            const botao = event.relatedTarget;
+            const nome = botao.getAttribute("data-nome");
+            const descricao = botao.getAttribute("data-descricao");
+            const preco = botao.getAttribute("data-preco");
+
+            document.getElementById("modalTitulo").textContent = nome;
+            document.getElementById("modalDescricao").textContent = descricao;
+            document.getElementById("modalPreco").textContent =
+                "R$ " + parseFloat(preco).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+        });
+    }
+
+});
+</script>
+
 </body>
 </html>
