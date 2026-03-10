@@ -1,5 +1,3 @@
-// main.js
-
 import { buscarDepoimentos, enviarFormulario } from "./api.js";
 import {
     atualizarCarrinho,
@@ -26,7 +24,7 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
         const nome = this.dataset.nome;
         const preco = parseFloat(this.dataset.preco);
         const qtdInput = this.parentElement.querySelector(".qtd-produto");
-        const qtd = parseInt(qtdInput.value) || 1;
+        const qtd = parseInt(qtdInput.value);
 
         const produtoExistente = carrinho.find(item => item.nome === nome);
         if (produtoExistente) {
@@ -47,18 +45,13 @@ document.querySelectorAll(".btn-comprar").forEach(botao => {
 // =============================
 window.finalizarCompra = function() {
     if (carrinho.length === 0) {
-        // Modal de alerta
-        const modalAlerta = new bootstrap.Modal(document.getElementById("modalAlerta"));
-        document.getElementById("modalAlertaBody").textContent = "Seu carrinho está vazio!";
-        modalAlerta.show();
+        alert("Seu carrinho está vazio!");
         return;
     }
 
-    // Modal de compra
     const modalCompra = new bootstrap.Modal(document.getElementById("modalCompra"));
     modalCompra.show();
 
-    // Limpa carrinho
     carrinho = [];
     salvarCarrinho();
     atualizarCarrinho(carrinho);
@@ -66,13 +59,27 @@ window.finalizarCompra = function() {
 }
 
 // =============================
-// LIMPAR CARRINHO
+// ABRIR MODAL CONFIRMAÇÃO LIMPAR CARRINHO
 // =============================
-window.limparCarrinho = function() {
-    carrinho = [];
-    salvarCarrinho();
-    atualizarCarrinho(carrinho);
-    atualizarContador(carrinho);
+window.abrirConfirmacaoLimpar = function() {
+    const modal = new bootstrap.Modal(document.getElementById("modalConfirmarLimpar"));
+    modal.show();
+}
+
+// =============================
+// CONFIRMAR LIMPAR CARRINHO
+// =============================
+const btnConfirmarLimpar = document.getElementById("confirmarLimpar");
+if (btnConfirmarLimpar) {
+    btnConfirmarLimpar.addEventListener("click", () => {
+        carrinho = [];
+        salvarCarrinho();
+        atualizarCarrinho(carrinho);
+        atualizarContador(carrinho);
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById("modalConfirmarLimpar"));
+        modal.hide();
+    });
 }
 
 // =============================
