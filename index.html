@@ -54,80 +54,48 @@ tecnologia, qualidade e desempenho incomparáveis.
 <h2 class="text-center mb-4">Nossos Produtos</h2>
 <div class="row g-4">
 
-<!-- Produto 1 -->
 <div class="col-md-4">
 <div class="card h-100 shadow">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600" class="card-img-top img-produto">
-<div class="card-body">
-<h5>Smartphone XPro</h5>
-<p>Tela AMOLED 6.5", 128GB, câmera 50MP.</p>
-<p class="fw-bold text-success">R$ 2.500,00</p>
-<label class="form-label">Quantidade</label>
-<input type="number" class="form-control qtd-produto" value="1" min="1">
-<button class="btn btn-success mt-3 w-100 btn-comprar" data-nome="Smartphone XPro" data-preco="2500">Adicionar ao Carrinho</button>
-<button class="btn btn-primary mt-2 w-100" data-bs-toggle="modal" data-bs-target="#modalProduto"
-data-nome="Smartphone XPro" data-descricao="Tela AMOLED 6.5, 128GB e câmera 50MP." data-preco="2500">
-Ver Detalhes
-</button>
+<img src="https://via.placeholder.com/300x200" class="card-img-top img-produto" alt="Produto 1">
+<div class="card-body text-center">
+<h5 class="card-title">Produto 1</h5>
+<p class="card-text">Descrição do produto 1.</p>
+<span class="fw-bold text-success">199,90</span>
+</div>
+<div class="card-footer text-center bg-white border-0">
+<button class="btn btn-success btn-comprar" data-nome="Produto 1" data-preco="199.9">Finalizar Compra</button>
 </div>
 </div>
 </div>
 
-<!-- Produto 2 -->
 <div class="col-md-4">
 <div class="card h-100 shadow">
-<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600" class="card-img-top img-produto">
-<div class="card-body">
-<h5>Notebook UltraTech</h5>
-<p>i7, 16GB RAM, SSD 512GB.</p>
-<p class="fw-bold text-success">R$ 4.500,00</p>
-<label class="form-label">Quantidade</label>
-<input type="number" class="form-control qtd-produto" value="1" min="1">
-<button class="btn btn-success mt-3 w-100 btn-comprar" data-nome="Notebook UltraTech" data-preco="4500">Adicionar ao Carrinho</button>
-<button class="btn btn-primary mt-2 w-100" data-bs-toggle="modal" data-bs-target="#modalProduto"
-data-nome="Notebook UltraTech" data-descricao="Notebook com processador i7, 16GB RAM e SSD 512GB." data-preco="4500">
-Ver Detalhes
-</button>
+<img src="https://via.placeholder.com/300x200" class="card-img-top img-produto" alt="Produto 2">
+<div class="card-body text-center">
+<h5 class="card-title">Produto 2</h5>
+<p class="card-text">Descrição do produto 2.</p>
+<span class="fw-bold text-success">299,90</span>
+</div>
+<div class="card-footer text-center bg-white border-0">
+<button class="btn btn-success btn-comprar" data-nome="Produto 2" data-preco="299.9">Finalizar Compra</button>
 </div>
 </div>
 </div>
 
-<!-- Produto 3 -->
 <div class="col-md-4">
 <div class="card h-100 shadow">
-<img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600" class="card-img-top img-produto">
-<div class="card-body">
-<h5>Fone Bluetooth Pro</h5>
-<p>Cancelamento de ruído ativo, bateria 30h.</p>
-<p class="fw-bold text-success">R$ 350,00</p>
-<label class="form-label">Quantidade</label>
-<input type="number" class="form-control qtd-produto" value="1" min="1">
-<button class="btn btn-success mt-3 w-100 btn-comprar" data-nome="Fone Bluetooth Pro" data-preco="350">Adicionar ao Carrinho</button>
-<button class="btn btn-primary mt-2 w-100" data-bs-toggle="modal" data-bs-target="#modalProduto"
-data-nome="Fone Bluetooth Pro" data-descricao="Fone com cancelamento de ruído e bateria de 30 horas." data-preco="350">
-Ver Detalhes
-</button>
+<img src="https://via.placeholder.com/300x200" class="card-img-top img-produto" alt="Produto 3">
+<div class="card-body text-center">
+<h5 class="card-title">Produto 3</h5>
+<p class="card-text">Descrição do produto 3.</p>
+<span class="fw-bold text-success">399,90</span>
+</div>
+<div class="card-footer text-center bg-white border-0">
+<button class="btn btn-success btn-comprar" data-nome="Produto 3" data-preco="399.9">Finalizar Compra</button>
 </div>
 </div>
 </div>
 
-</div>
-</div>
-
-<!-- MODAL PRODUTO -->
-<div class="modal fade" id="modalProduto" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="modalTitulo"></h5>
-<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-</div>
-<div class="modal-body" id="modalDescricao"></div>
-<div class="modal-footer">
-<span class="fw-bold text-success" id="modalPreco"></span>
-<button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-</div>
-</div>
 </div>
 </div>
 
@@ -145,6 +113,22 @@ Ver Detalhes
 </div>
 <div class="modal-footer justify-content-center">
 <button class="btn btn-success" data-bs-dismiss="modal">Continuar comprando</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- MODAL ALERTA -->
+<div class="modal fade" id="modalAlerta" tabindex="-1">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content text-center">
+<div class="modal-header bg-danger text-white">
+<h5 class="modal-title">Atenção!</h5>
+<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+</div>
+<div class="modal-body" id="modalAlertaBody"></div>
+<div class="modal-footer justify-content-center">
+<button class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
 </div>
 </div>
 </div>
@@ -191,7 +175,6 @@ Ver Detalhes
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 <script type="module" src="js/main.js"></script>
 
 </body>
