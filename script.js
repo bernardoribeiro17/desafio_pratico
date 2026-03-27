@@ -2,196 +2,169 @@
 // CARRINHO COM LOCAL STORAGE
 // =============================
 
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
 function salvarCarrinho() {
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
 }
-
 
 // =============================
 // CONTADOR DO CARRINHO
 // =============================
 
 function atualizarContador() {
+  const contador = document.getElementById('contador-carrinho');
 
-    const contador = document.getElementById("contador-carrinho");
+  if (!contador) return;
 
-    if (!contador) return;
+  let totalItens = 0;
 
-    let totalItens = 0;
+  carrinho.forEach((item) => {
+    totalItens += item.qtd;
+  });
 
-    carrinho.forEach(item => {
-        totalItens += item.qtd;
-    });
-
-    contador.textContent = totalItens;
+  contador.textContent = totalItens;
 }
-
 
 // =============================
 // ATUALIZAR CARRINHO NA TELA
 // =============================
 
 function atualizarCarrinho() {
+  const lista = document.getElementById('lista-carrinho');
+  const total = document.getElementById('total-carrinho');
 
-    const lista = document.getElementById("lista-carrinho");
-    const total = document.getElementById("total-carrinho");
+  if (!lista || !total) return;
 
-    if (!lista || !total) return;
+  lista.innerHTML = '';
 
-    lista.innerHTML = "";
+  let soma = 0;
 
-    let soma = 0;
+  carrinho.forEach((item) => {
+    const li = document.createElement('li');
 
-    carrinho.forEach(item => {
+    li.className =
+      'list-group-item d-flex justify-content-between align-items-center';
 
-        const li = document.createElement("li");
+    const subtotal = item.preco * item.qtd;
 
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
+    soma += subtotal;
 
-        const subtotal = item.preco * item.qtd;
-
-        soma += subtotal;
-
-        li.innerHTML = `
+    li.innerHTML = `
             ${item.nome} (x${item.qtd})
-            <span>R$ ${subtotal.toLocaleString("pt-BR", {minimumFractionDigits:2})}</span>
+            <span>R$ ${subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
         `;
 
-        lista.appendChild(li);
+    lista.appendChild(li);
+  });
 
-    });
+  total.textContent = soma.toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
-    total.textContent = soma.toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
-
-    atualizarContador();
+  atualizarContador();
 }
-
 
 // =============================
 // ADICIONAR PRODUTO
 // =============================
 
-document.querySelectorAll(".btn-comprar").forEach(botao => {
+document.querySelectorAll('.btn-comprar').forEach((botao) => {
+  botao.addEventListener('click', function () {
+    const nome = this.dataset.nome;
+    const preco = parseFloat(this.dataset.preco);
 
-    botao.addEventListener("click", function () {
+    const qtdInput = this.parentElement.querySelector('.qtd-produto');
+    const qtd = parseInt(qtdInput.value);
 
-        const nome = this.dataset.nome;
-        const preco = parseFloat(this.dataset.preco);
+    const produtoExistente = carrinho.find((item) => item.nome === nome);
 
-        const qtdInput = this.parentElement.querySelector(".qtd-produto");
-        const qtd = parseInt(qtdInput.value);
+    if (produtoExistente) {
+      produtoExistente.qtd += qtd;
+    } else {
+      carrinho.push({
+        nome: nome,
+        preco: preco,
+        qtd: qtd,
+      });
+    }
 
-        const produtoExistente = carrinho.find(item => item.nome === nome);
+    salvarCarrinho();
+    atualizarCarrinho();
 
-        if (produtoExistente) {
-
-            produtoExistente.qtd += qtd;
-
-        } else {
-
-            carrinho.push({
-                nome: nome,
-                preco: preco,
-                qtd: qtd
-            });
-
-        }
-
-        salvarCarrinho();
-        atualizarCarrinho();
-
-        mostrarToast();
-
-    });
-
+    mostrarToast();
+  });
 });
-
 
 // =============================
 // TOAST BOOTSTRAP
 // =============================
 
-function mostrarToast(){
+function mostrarToast() {
+  const toastElemento = document.getElementById('toastCarrinho');
 
-    const toastElemento = document.getElementById("toastCarrinho");
+  if (!toastElemento) return;
 
-    if(!toastElemento) return;
+  const toast = new bootstrap.Toast(toastElemento);
 
-    const toast = new bootstrap.Toast(toastElemento);
-
-    toast.show();
-
+  toast.show();
 }
-
 
 // =============================
 // LIMPAR CARRINHO
 // =============================
 
-function limparCarrinho(){
+function limparCarrinho() {
+  carrinho = [];
 
-    carrinho = [];
+  salvarCarrinho();
 
-    salvarCarrinho();
-
-    atualizarCarrinho();
-
+  atualizarCarrinho();
 }
-
 
 // =============================
 // FINALIZAR COMPRA
 // =============================
 
-function finalizarCompra(){
+function finalizarCompra() {
+  if (carrinho.length === 0) {
+    alert('Seu carrinho está vazio!');
 
-    if(carrinho.length === 0){
+    return;
+  }
 
-        alert("Seu carrinho está vazio!");
+  alert('Compra realizada com sucesso! 🛒');
 
-        return;
+  carrinho = [];
 
-    }
+  salvarCarrinho();
 
-    alert("Compra realizada com sucesso! 🛒");
-
-    carrinho = [];
-
-    salvarCarrinho();
-
-    atualizarCarrinho();
-
+  atualizarCarrinho();
 }
-
 
 // =============================
 // DEPOIMENTOS API
 // =============================
 
-async function carregarDepoimentos(){
+async function carregarDepoimentos() {
+  const container = document.getElementById('lista-depoimentos');
 
-    const container = document.getElementById("lista-depoimentos");
+  if (!container) return;
 
-    if(!container) return;
+  try {
+    const resposta = await fetch(
+      'https://jsonplaceholder.typicode.com/comments?_limit=3'
+    );
 
-    try{
+    const dados = await resposta.json();
 
-        const resposta = await fetch("https://jsonplaceholder.typicode.com/comments?_limit=3");
+    dados.forEach((depoimento) => {
+      const div = document.createElement('div');
 
-        const dados = await resposta.json();
+      div.className = 'col-md-4';
 
-        dados.forEach(depoimento => {
-
-            const div = document.createElement("div");
-
-            div.className = "col-md-4";
-
-            div.innerHTML = `
+      div.innerHTML = `
                 <div class="card shadow-sm h-100">
                     <div class="card-body">
                         <h6 class="card-title">${depoimento.name}</h6>
@@ -200,18 +173,12 @@ async function carregarDepoimentos(){
                 </div>
             `;
 
-            container.appendChild(div);
-
-        });
-
-    }catch(erro){
-
-        container.innerHTML = "Erro ao carregar depoimentos.";
-
-    }
-
+      container.appendChild(div);
+    });
+  } catch (_erro) {
+    container.innerHTML = 'Erro ao carregar depoimentos.';
+  }
 }
-
 
 // =============================
 // INICIALIZAÇÃO
