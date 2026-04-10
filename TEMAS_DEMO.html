@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TechStore - Demonstração de Temas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/main.js"></script>
+    <style>
+      .theme-preview {
+        padding: 2rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+        color: var(--color-text);
+        background-color: var(--color-background);
+        border: 2px solid var(--color-border);
+        transition: all 0.3s ease;
+      }
+
+      .color-swatch {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        border-radius: 0.5rem;
+        margin: 0.5rem;
+        border: 1px solid #ccc;
+        vertical-align: middle;
+      }
+
+      .code-block {
+        background-color: var(--color-surface);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"
+          >TechStore - Temas Demo</a
+        >
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button
+              class="btn btn-sm btn-outline-primary"
+              onclick="theme.set('default')"
+            >
+              Tema Default
+            </button>
+          </li>
+          <li class="nav-item ms-2">
+            <button
+              class="btn btn-sm btn-outline-primary"
+              onclick="theme.set('dark')"
+            >
+              Tema Dark
+            </button>
+          </li>
+          <li class="nav-item ms-2">
+            <button
+              class="btn btn-sm btn-outline-primary"
+              onclick="theme.set('green')"
+            >
+              Tema Green
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container mt-5">
+      <h1 class="mb-4">🎨 Demonstração de Temas SCSS</h1>
+
+      <!-- SEÇÃO: TEMA ATUAL -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <div class="theme-preview">
+            <h2>Tema Atual</h2>
+            <p id="theme-current" class="lead">Carregando...</p>
+            <p class="text-muted">
+              O tema é salvo em localStorage e persiste ao recarregar a página
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: CORES -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2>Paleta de Cores Disponível</h2>
+
+          <!-- TEMA DEFAULT -->
+          <div class="theme-preview">
+            <h3 class="mb-3">Tema DEFAULT (Azul/Laranja)</h3>
+            <div>
+              <strong>Cores Primárias:</strong>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-primary)"
+                title="Primary"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-primary-dark)"
+                title="Primary Dark"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-primary-light)"
+                title="Primary Light"
+              ></div>
+            </div>
+            <div class="mt-3">
+              <strong>Cores Secundárias:</strong>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-secondary)"
+                title="Secondary"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-secondary-dark)"
+                title="Secondary Dark"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-secondary-light)"
+                title="Secondary Light"
+              ></div>
+            </div>
+            <div class="mt-3">
+              <strong>Cores de Estado:</strong>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-success)"
+                title="Success"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-warning)"
+                title="Warning"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-danger)"
+                title="Danger"
+              ></div>
+              <div
+                class="color-swatch"
+                style="background-color: var(--color-info)"
+                title="Info"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: TIPOGRAFIA -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2>Variáveis de Tipografia</h2>
+
+          <div class="theme-preview">
+            <h3>Font Families</h3>
+            <p style="font-family: 'Segoe UI', sans-serif">
+              🎯 Segoe UI (Primária) - Usada em todo o projeto
+            </p>
+            <p style="font-family: 'Courier New', monospace">
+              🔧 Courier New (Secundária) - Usada em códigos
+            </p>
+
+            <h3 class="mt-4">Font Weights</h3>
+            <p style="font-weight: 300">300 - Light</p>
+            <p style="font-weight: 400">400 - Normal</p>
+            <p style="font-weight: 600">600 - Semibold</p>
+            <p style="font-weight: 700">700 - Bold</p>
+            <p style="font-weight: 800">800 - Extrabold</p>
+
+            <h3 class="mt-4">Font Sizes</h3>
+            <p style="font-size: 0.75rem">XS - 0.75rem (12px)</p>
+            <p style="font-size: 0.875rem">SM - 0.875rem (14px)</p>
+            <p style="font-size: 1rem">Base - 1rem (16px)</p>
+            <p style="font-size: 1.125rem">LG - 1.125rem (18px)</p>
+            <p style="font-size: 1.25rem">XL - 1.25rem (20px)</p>
+            <p style="font-size: 1.5rem">2XL - 1.5rem (24px)</p>
+            <p style="font-size: 1.875rem">3XL - 1.875rem (30px)</p>
+            <p style="font-size: 2.25rem">4XL - 2.25rem (36px)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: COMPONENTES -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2>Componentes Estilizados</h2>
+
+          <!-- CARDS -->
+          <div class="row g-4 mt-3">
+            <div class="col-md-4">
+              <div class="card h-100 shadow">
+                <div class="card-body">
+                  <h5 class="card-title">Card Exemplo 1</h5>
+                  <p class="card-text">
+                    Este é um exemplo de card com estilos do tema atual
+                  </p>
+                  <button class="btn btn-primary">Ação</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card h-100 shadow">
+                <div class="card-body">
+                  <h5 class="card-title">Card Exemplo 2</h5>
+                  <p class="card-text">
+                    Cards herdam cores do tema automaticamente
+                  </p>
+                  <button class="btn btn-success">Sucesso</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card h-100 shadow">
+                <div class="card-body">
+                  <h5 class="card-title">Card Exemplo 3</h5>
+                  <p class="card-text">Tente alternar os temas acima!</p>
+                  <button class="btn btn-danger">Remover</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BADGES -->
+          <div class="mt-4">
+            <h4>Badges</h4>
+            <span class="badge bg-primary">Primary</span>
+            <span class="badge bg-secondary">Secondary</span>
+            <span class="badge bg-success">Success</span>
+            <span class="badge bg-danger">Danger</span>
+            <span class="badge bg-warning text-dark">Warning</span>
+            <span class="badge bg-info">Info</span>
+          </div>
+
+          <!-- ALERTS -->
+          <div class="mt-4">
+            <h4>Alertas</h4>
+            <div class="alert alert-primary">Alert Primary</div>
+            <div class="alert alert-success">Alert Success</div>
+            <div class="alert alert-danger">Alert Danger</div>
+            <div class="alert alert-warning">Alert Warning</div>
+          </div>
+
+          <!-- BOTÕES -->
+          <div class="mt-4">
+            <h4>Botões</h4>
+            <button class="btn btn-primary me-2">Primary</button>
+            <button class="btn btn-secondary me-2">Secondary</button>
+            <button class="btn btn-success me-2">Success</button>
+            <button class="btn btn-danger me-2">Danger</button>
+            <button class="btn btn-outline-primary">Outline</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: RESPONSIVIDADE -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2>Responsividade</h2>
+
+          <div class="theme-preview">
+            <p><strong>Breakpoints Disponíveis:</strong></p>
+            <ul>
+              <li><strong>XS:</strong> 0 (Mobile)</li>
+              <li><strong>SM:</strong> 576px (Dispositivos pequenos)</li>
+              <li><strong>MD:</strong> 768px (Tablets)</li>
+              <li><strong>LG:</strong> 992px (Desktops pequenos)</li>
+              <li><strong>XL:</strong> 1200px (Desktops)</li>
+              <li><strong>2XL:</strong> 1400px (Desktops grandes)</li>
+            </ul>
+
+            <p class="mt-3">
+              Redimensione o navegador para ver os componentes se adaptarem aos
+              diferentes tamanhos de tela!
+            </p>
+
+            <div class="row g-3 mt-3">
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <p>Responsivo</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <p>Responsivo</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <p>Responsivo</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                  <div class="card-body">
+                    <p>Responsivo</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: CÓDIGO EXEMPLO -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <h2>Código Exemplo</h2>
+
+          <div class="theme-preview">
+            <h4>Como usar CSS Variables:</h4>
+            <div class="code-block">
+              <pre><code>/* Use as variáveis CSS disponíveis no seu CSS/SCSS */
+.elemento {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* As cores mudam automaticamente ao trocar de tema */</code></pre>
+            </div>
+
+            <h4 class="mt-3">Como chamar temas via JavaScript:</h4>
+            <div class="code-block">
+              <pre><code>// Definir tema específico
+theme.set('default')  // tema azul/laranja
+theme.set('dark')     // tema escuro
+theme.set('green')    // tema verde
+
+// Alternar para próximo tema
+theme.toggle()
+
+// Verificar tema atual
+const currentTheme = localStorage.getItem('tech-store-theme')</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center p-3 mt-5">
+      © 2026 TechStore - Demonstração de Temas SCSS
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Atualizar exibição do tema atual
+      function updateThemeDisplay() {
+        const currentTheme =
+          localStorage.getItem('tech-store-theme') || 'default';
+        const labels = {
+          default: '🎨 Default (Azul/Laranja)',
+          dark: '🌙 Dark (Escuro)',
+          green: '🌿 Green (Verde/Ecológico)',
+        };
+        document.getElementById('theme-current').textContent =
+          labels[currentTheme] || 'Padrão';
+      }
+
+      document.addEventListener('DOMContentLoaded', updateThemeDisplay);
+      // Atualizar a cada 1 segundo para refletir mudanças
+      setInterval(updateThemeDisplay, 1000);
+    </script>
+  </body>
+</html>
