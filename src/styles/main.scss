@@ -1,0 +1,165 @@
+// =============================
+// MAIN SCSS - IMPORTAÇÃO DE TODOS OS MÓDULOS
+// =============================
+
+// 1. Variáveis (deve ser importado primeiro)
+@import 'variables';
+
+// 2. Temas de cores
+@import 'themes';
+
+// 3. Tipografia
+@import 'typography';
+
+// 4. Componentes
+@import 'components';
+
+// 5. Responsividade (deve ser importado por último)
+@import 'responsive';
+
+// =============================
+// ESTILOS GLOBAIS ADICIONAIS
+// =============================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+  min-height: calc(100vh - 200px);
+}
+
+// =============================
+// RESETE DE ESTILOS BOOTSTRAP
+// =============================
+
+.container {
+  background-color: var(--color-background);
+}
+
+// Remover estilos duplicados do Bootstrap
+.bg-light {
+  background-color: var(--color-surface) !important;
+}
+
+.bg-dark {
+  background-color: var(--color-dark) !important;
+}
+
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.text-success {
+  color: var(--color-success) !important;
+}
+
+.text-danger {
+  color: var(--color-danger) !important;
+}
+
+// =============================
+// UTILITÁRIOS DE LAYOUT
+// =============================
+
+.section {
+  padding: $spacing-2xl $spacing-base;
+
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-2xl 0;
+  }
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  padding: $spacing-2xl $spacing-base;
+  border-radius: $border-radius-lg;
+
+  h1 {
+    color: white;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+// =============================
+// ESTILOS DE PÁGINA DE ERRO
+// =============================
+
+.page-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+
+  h1 {
+    font-size: 5rem;
+    margin-bottom: $spacing-base;
+  }
+
+  p {
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+// =============================
+// SCROLLBAR CUSTOMIZADO
+// =============================
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: $border-radius-full;
+
+  &:hover {
+    background: var(--color-primary-dark);
+  }
+}
+
+// =============================
+// IMPRESSÃO
+// =============================
+
+@media print {
+  body {
+    background-color: white;
+  }
+
+  .navbar,
+  .btn,
+  .no-print {
+    display: none;
+  }
+
+  main {
+    min-height: auto;
+  }
+}

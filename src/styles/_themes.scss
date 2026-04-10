@@ -1,0 +1,277 @@
+// =============================
+// TEMA DEFAULT (Azul/Laranja)
+// =============================
+
+:root {
+  --color-primary: #{$color-primary};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+
+  --color-secondary: #{$color-secondary};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-secondary-light: #{$color-secondary-light};
+
+  --color-background: #{$color-white};
+  --color-surface: #{$color-gray-100};
+  --color-text: #{$color-gray-800};
+  --color-text-light: #{$color-gray-600};
+  --color-border: #{$color-gray-300};
+
+  --color-success: #{$color-success};
+  --color-warning: #{$color-warning};
+  --color-danger: #{$color-danger};
+  --color-info: #{$color-info};
+}
+
+// =============================
+// TEMA DARK (Escuro)
+// =============================
+
+html.theme-dark {
+  /* Cores primárias - mantém o azul mas com tons mais escuros */
+  --color-primary: #4d95ff;
+  --color-primary-dark: #3366cc;
+  --color-primary-light: #66aaff;
+
+  /* Cores secundárias - laranja mais brilhante no dark */
+  --color-secondary: #ffaa33;
+  --color-secondary-dark: #ff9900;
+  --color-secondary-light: #ffbb55;
+
+  /* Cores de fundo */
+  --color-background: #1a1a1a;
+  --color-surface: #2d2d2d;
+  --color-text: #e6e6e6;
+  --color-text-light: #a6a6a6;
+  --color-border: #404040;
+
+  /* Cores de estado */
+  --color-success: #4ade80;
+  --color-warning: #facc15;
+  --color-danger: #f87171;
+  --color-info: #4dd0e1;
+}
+
+// =============================
+// TEMA GREEN (Verde/Ecológico)
+// =============================
+
+html.theme-green {
+  /* Cores primárias - verde */
+  --color-primary: #059669;
+  --color-primary-dark: #047857;
+  --color-primary-light: #10b981;
+
+  /* Cores secundárias - verde claro/amarelo */
+  --color-secondary: #84cc16;
+  --color-secondary-dark: #65a30d;
+  --color-secondary-light: #a3e635;
+
+  /* Cores de fundo */
+  --color-background: #f0fdf4;
+  --color-surface: #e0f2fe;
+  --color-text: #166534;
+  --color-text-light: #4b7c59;
+  --color-border: #bbf7d0;
+
+  /* Cores de estado */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #06b6d4;
+}
+
+// =============================
+// APLICAR CORES DO TEMA AOS ELEMENTOS
+// =============================
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+  background-color: var(--color-surface) !important;
+  border-bottom: 1px solid var(--color-border);
+
+  .navbar-brand {
+    color: var(--color-primary) !important;
+    font-weight: $font-weight-bold;
+
+    &:hover {
+      color: var(--color-primary-dark) !important;
+    }
+  }
+
+  .nav-link {
+    color: var(--color-text) !important;
+
+    &:hover,
+    &.active {
+      color: var(--color-primary) !important;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: $color-white;
+
+  &:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+
+  &:active,
+  &:focus {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: $color-white;
+
+  &:hover {
+    background-color: var(--color-secondary-dark);
+    border-color: var(--color-secondary-dark);
+  }
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+
+  &:hover {
+    background-color: darken(#28a745, 10%);
+  }
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+
+  &:hover {
+    background-color: darken(#dc3545, 10%);
+  }
+}
+
+.card {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+
+  .card-header {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: var(--color-border);
+  }
+
+  .card-title {
+    color: var(--color-text);
+  }
+
+  .card-text {
+    color: var(--color-text-light);
+  }
+}
+
+.badge {
+  &.bg-primary {
+    background-color: var(--color-primary) !important;
+  }
+
+  &.bg-secondary {
+    background-color: var(--color-secondary) !important;
+  }
+
+  &.bg-success {
+    background-color: var(--color-success) !important;
+  }
+
+  &.bg-danger {
+    background-color: var(--color-danger) !important;
+  }
+
+  &.bg-warning {
+    background-color: var(--color-warning) !important;
+    color: #000;
+  }
+
+  &.bg-info {
+    background-color: var(--color-info) !important;
+  }
+}
+
+.alert {
+  &.alert-primary {
+    background-color: rgba(0, 102, 204, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+  }
+
+  &.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: var(--color-success);
+    color: var(--color-success);
+  }
+
+  &.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+  }
+
+  &.alert-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-color: var(--color-warning);
+    color: #856404;
+  }
+
+  &.alert-info {
+    background-color: rgba(23, 162, 184, 0.1);
+    border-color: var(--color-info);
+    color: var(--color-info);
+  }
+}
+
+.table {
+  color: var(--color-text);
+  border-color: var(--color-border);
+
+  thead {
+    background-color: var(--color-primary);
+    color: $color-white;
+  }
+
+  tbody tr:hover {
+    background-color: var(--color-surface);
+  }
+}
+
+.form-control,
+.form-select,
+.form-check-input {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border-color: var(--color-border);
+
+  &:focus {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.25rem rgba(0, 102, 204, 0.25);
+  }
+}
+
+hr {
+  border-color: var(--color-border);
+}
+
+.text-muted {
+  color: var(--color-text-light) !important;
+}

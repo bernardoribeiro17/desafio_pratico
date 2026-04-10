@@ -1,0 +1,97 @@
+// =============================
+// VARIÁVEIS DE TIPOGRAFIA
+// =============================
+
+$font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-family-secondary: 'Courier New', Courier, monospace;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Font sizes
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
+
+// =============================
+// VARIÁVEIS DE CORES - TEMA DEFAULT (Azul/Laranja)
+// =============================
+
+// Cores primárias
+$color-primary: #0066cc;
+$color-primary-dark: #0052a3;
+$color-primary-light: #3399ff;
+
+// Cores secundárias
+$color-secondary: #ff8c00;
+$color-secondary-dark: #cc7000;
+$color-secondary-light: #ffb84d;
+
+// Cores neutras
+$color-dark: #1a1a1a;
+$color-gray-900: #1a1a1a;
+$color-gray-800: #333333;
+$color-gray-700: #4d4d4d;
+$color-gray-600: #666666;
+$color-gray-500: #808080;
+$color-gray-400: #999999;
+$color-gray-300: #cccccc;
+$color-gray-200: #e6e6e6;
+$color-gray-100: #f5f5f5;
+$color-white: #ffffff;
+
+// Cores de sucesso, aviso, erro
+$color-success: #28a745;
+$color-warning: #ffc107;
+$color-danger: #dc3545;
+$color-info: #17a2b8;
+
+// =============================
+// ESPAÇAMENTO
+// =============================
+
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-base: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+
+// =============================
+// BORDER RADIUS
+// =============================
+
+$border-radius-sm: 0.25rem;
+$border-radius-base: 0.5rem;
+$border-radius-lg: 1rem;
+$border-radius-full: 9999px;
+
+// =============================
+// SOMBRAS
+// =============================
+
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-base: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+
+// =============================
+// BREAKPOINTS
+// =============================
+
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-2xl: 1400px;

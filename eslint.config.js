@@ -1,5 +1,8 @@
 module.exports = [
   {
+    ignores: ['node_modules/', 'dist/', 'vite.config.js', 'src/main.js'],
+  },
+  {
     files: ['*.js'],
     languageOptions: {
       ecmaVersion: 'latest',
