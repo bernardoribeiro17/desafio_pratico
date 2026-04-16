@@ -1,4 +1,4 @@
-// =============================
+﻿// =============================
 // IMPORTAR STYLES SCSS
 // =============================
 
@@ -15,7 +15,7 @@ import './script.js';
 // =============================
 
 const THEME_KEY = 'tech-store-theme';
-const THEMES = ['default', 'dark', 'green'];
+const THEMES = ['default', 'dark', 'green', 'solar', 'frost'];
 
 /**
  * Inicializar tema salvo
@@ -64,6 +64,30 @@ function updateThemeSwitcher() {
   }
 }
 
+function createThemeButton(id, text, theme) {
+  const button = document.createElement('button');
+  button.id = id;
+  button.type = 'button';
+  button.className = 'btn btn-sm btn-outline-secondary ms-2';
+  button.textContent = text;
+  button.addEventListener('click', () => setTheme(theme));
+  return button;
+}
+
+function attachThemeButton(id, theme, isToggle = false) {
+  const button = document.getElementById(id);
+  if (!button) return null;
+  button.type = 'button';
+
+  if (isToggle) {
+    button.addEventListener('click', toggleTheme);
+  } else {
+    button.addEventListener('click', () => setTheme(theme));
+  }
+
+  return button;
+}
+
 /**
  * Obter label do tema em português
  * @param {string} theme - Nome do tema
@@ -74,6 +98,8 @@ function getThemeLabel(theme) {
     default: 'Azul/Laranja',
     dark: 'Escuro',
     green: 'Verde',
+    solar: 'Solar',
+    frost: 'Frost',
   };
   return labels[theme] || 'Padrão';
 }
@@ -82,25 +108,35 @@ function getThemeLabel(theme) {
  * Criar switcher de temas na navbar
  */
 function createThemeSwitcher() {
-  const navbar = document.querySelector('.navbar');
+  const navbar = document.querySelector('nav');
   if (!navbar) return;
 
-  const navList = navbar.querySelector('.navbar-nav');
+  const navList = navbar.querySelector('.navbar-nav, .nav');
   if (!navList) return;
 
-  // Verificar se já existe
-  if (document.getElementById('theme-switcher')) return;
+  if (document.getElementById('theme-switcher')) {
+    attachThemeButton('theme-light-button', 'default');
+    attachThemeButton('theme-dark-button', 'dark');
+    attachThemeButton('theme-switcher', null, true);
+    return;
+  }
 
   const li = document.createElement('li');
-  li.className = 'nav-item';
+  li.className = 'nav-item d-flex align-items-center';
 
-  const button = document.createElement('button');
-  button.id = 'theme-switcher';
-  button.className = 'btn btn-sm btn-outline-primary ms-3';
-  button.innerHTML = '🎨 Tema: Azul/Laranja';
-  button.addEventListener('click', toggleTheme);
+  const darkButton = createThemeButton('theme-dark-button', 'Escuro', 'dark');
+  const lightButton = createThemeButton('theme-light-button', 'Claro', 'default');
 
-  li.appendChild(button);
+  const toggleButton = document.createElement('button');
+  toggleButton.id = 'theme-switcher';
+  toggleButton.type = 'button';
+  toggleButton.className = 'btn btn-sm btn-outline-primary ms-3';
+  toggleButton.textContent = '🎨 Tema: Azul/Laranja';
+  toggleButton.addEventListener('click', toggleTheme);
+
+  li.appendChild(lightButton);
+  li.appendChild(darkButton);
+  li.appendChild(toggleButton);
   navList.appendChild(li);
 }
 

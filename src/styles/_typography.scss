@@ -6,7 +6,8 @@ body {
   font-family: $font-family-primary;
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
-  color: $color-gray-800;
+  font-style: $font-style-normal;
+  color: $font-color-base;
   line-height: 1.6;
 }
 
@@ -18,9 +19,10 @@ h5,
 h6 {
   font-family: $font-family-primary;
   font-weight: $font-weight-bold;
+  font-style: $font-style-normal;
   line-height: 1.3;
   margin-bottom: $spacing-lg;
-  color: $color-dark;
+  color: $font-color-heading;
 }
 
 h1 {
@@ -53,13 +55,13 @@ p {
   margin-bottom: $spacing-base;
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
-  color: $color-gray-700;
+  color: $font-color-muted;
 }
 
 .lead {
   font-size: $font-size-lg;
   font-weight: $font-weight-normal;
-  color: $color-gray-600;
+  color: $font-color-muted;
   line-height: 1.7;
 }
 

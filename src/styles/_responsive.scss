@@ -267,6 +267,37 @@ img {
   }
 }
 
+.hero {
+  padding: $spacing-2xl $spacing-base;
+  text-align: center;
+
+  @include respond-to('md') {
+    padding: $spacing-3xl $spacing-base;
+  }
+
+  h1,
+  .display-4 {
+    margin-bottom: $spacing-base;
+  }
+
+  p {
+    margin: 0 auto;
+    max-width: 44rem;
+  }
+
+  .btn {
+    min-width: 220px;
+  }
+}
+
+.row {
+  gap: $spacing-lg;
+
+  @include respond-to('md') {
+    gap: $spacing-xl;
+  }
+}
+
 // =============================
 // CARD RESPONSIVO
 // =============================
