@@ -10,8 +10,14 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./theme-fallback.css" />
 
-    <script type="module" src="/src/main.js"></script>
+    <style>
+      .img-produto {
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
   </head>
 
   <body>
@@ -43,7 +49,29 @@
             <li class="nav-item">
               <a class="nav-link" href="contato.html">Contato</a>
             </li>
-
+            <li class="nav-item d-flex align-items-center">
+              <button
+                id="theme-light-button"
+                type="button"
+                class="btn btn-sm btn-theme-light ms-3"
+              >
+                Claro
+              </button>
+              <button
+                id="theme-dark-button"
+                type="button"
+                class="btn btn-sm btn-theme-dark ms-2"
+              >
+                Escuro
+              </button>
+              <button
+                id="theme-switcher"
+                type="button"
+                class="btn btn-sm btn-theme-toggle ms-2"
+              >
+                🎨 Tema: Azul/Laranja
+              </button>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#carrinho">
                 Carrinho 🛒
@@ -54,6 +82,9 @@
         </div>
       </div>
     </nav>
+
+    <script type="module" src="./src/main.js"></script>
+    <script src="./theme-fallback.js"></script>
 
     <!-- PRODUTOS -->
 
@@ -221,6 +252,10 @@
       © 2026 TechStore - Todos os direitos reservados
     </footer>
 
+    <script type="module" src="./src/main.js"></script>
+    <script src="./theme-fallback.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="script.js"></script>
   </body>
 </html>
