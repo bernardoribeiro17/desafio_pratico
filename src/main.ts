@@ -8,29 +8,28 @@ import './styles/main.scss';
 // IMPORTAR SCRIPT ORIGINAL
 // =============================
 
-import './script.js';
+import './script.ts';
 
 // =============================
 // THEME SWITCHER
 // =============================
 
 const THEME_KEY = 'tech-store-theme';
-const THEMES = ['default', 'dark', 'green', 'solar', 'frost'];
+const THEMES: readonly string[] = ['default', 'dark', 'green', 'solar', 'frost'] as const;
 
 /**
  * Inicializar tema salvo
  */
-function initializeTheme() {
+const initializeTheme = (): void => {
   const savedTheme = localStorage.getItem(THEME_KEY) || 'default';
   setTheme(savedTheme);
   updateThemeSwitcher();
-}
+};
 
 /**
  * Definir tema
- * @param {string} theme - Nome do tema
  */
-function setTheme(theme) {
+const setTheme = (theme: string): void => {
   const html = document.documentElement;
 
   if (theme === 'default') {
@@ -41,12 +40,12 @@ function setTheme(theme) {
 
   localStorage.setItem(THEME_KEY, theme);
   updateThemeSwitcher();
-}
+};
 
 /**
  * Alternar entre temas
  */
-function toggleTheme() {
+const toggleTheme = (): void => {
   const currentTheme = localStorage.getItem(THEME_KEY) || 'default';
   const currentIndex = THEMES.indexOf(currentTheme);
   const nextTheme = THEMES[(currentIndex + 1) % THEMES.length];
@@ -56,15 +55,15 @@ function toggleTheme() {
 /**
  * Atualizar estado do switcher
  */
-function updateThemeSwitcher() {
+const updateThemeSwitcher = (): void => {
   const switcher = document.getElementById('theme-switcher');
   if (switcher) {
     const currentTheme = localStorage.getItem(THEME_KEY) || 'default';
     switcher.textContent = `🎨 Tema: ${getThemeLabel(currentTheme)}`;
   }
-}
+};
 
-function createThemeButton(id, text, theme) {
+const createThemeButton = (id: string, text: string, theme: string): HTMLButtonElement => {
   const button = document.createElement('button');
   button.id = id;
   button.type = 'button';
@@ -72,29 +71,27 @@ function createThemeButton(id, text, theme) {
   button.textContent = text;
   button.addEventListener('click', () => setTheme(theme));
   return button;
-}
+};
 
-function attachThemeButton(id, theme, isToggle = false) {
+const attachThemeButton = (id: string, theme: string | null, isToggle = false): HTMLElement | null => {
   const button = document.getElementById(id);
   if (!button) return null;
   button.type = 'button';
 
   if (isToggle) {
     button.addEventListener('click', toggleTheme);
-  } else {
+  } else if (theme) {
     button.addEventListener('click', () => setTheme(theme));
   }
 
   return button;
-}
+};
 
 /**
  * Obter label do tema em português
- * @param {string} theme - Nome do tema
- * @returns {string}
  */
-function getThemeLabel(theme) {
-  const labels = {
+const getThemeLabel = (theme: string): string => {
+  const labels: Record<string, string> = {
     default: 'Azul/Laranja',
     dark: 'Escuro',
     green: 'Verde',
@@ -107,7 +104,7 @@ function getThemeLabel(theme) {
 /**
  * Criar switcher de temas na navbar
  */
-function createThemeSwitcher() {
+const createThemeSwitcher = (): void => {
   const navbar = document.querySelector('nav');
   if (!navbar) return;
 
@@ -138,17 +135,27 @@ function createThemeSwitcher() {
   li.appendChild(darkButton);
   li.appendChild(toggleButton);
   navList.appendChild(li);
-}
+};
 
 /**
  * Inicializar ao carregar o DOM
  */
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   initializeTheme();
   createThemeSwitcher();
 });
 
 // Exportar funções para uso global
+declare global {
+  interface Window {
+    theme?: {
+      set: (theme: string) => void;
+      toggle: () => void;
+      init: () => void;
+    };
+  }
+}
+
 window.theme = {
   set: setTheme,
   toggle: toggleTheme,

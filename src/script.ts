@@ -2,35 +2,42 @@
 // CARRINHO COM LOCAL STORAGE
 // =============================
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-function salvarCarrinho() {
-  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+interface Produto {
+  nome: string;
+  preco: number;
+  qtd: number;
 }
+
+interface Depoimento {
+  name: string;
+  body: string;
+}
+
+let carrinho: Produto[] = JSON.parse(localStorage.getItem('carrinho') || '[]');
+
+const salvarCarrinho = (): void => {
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+};
 
 // =============================
 // CONTADOR DO CARRINHO
 // =============================
 
-function atualizarContador() {
+const atualizarContador = (): void => {
   const contador = document.getElementById('contador-carrinho');
 
   if (!contador) return;
 
-  let totalItens = 0;
+  const totalItens = carrinho.reduce((sum, item) => sum + item.qtd, 0);
 
-  carrinho.forEach((item) => {
-    totalItens += item.qtd;
-  });
-
-  contador.textContent = totalItens;
-}
+  contador.textContent = totalItens.toString();
+};
 
 // =============================
 // ATUALIZAR CARRINHO NA TELA
 // =============================
 
-function atualizarCarrinho() {
+const atualizarCarrinho = (): void => {
   const lista = document.getElementById('lista-carrinho');
   const total = document.getElementById('total-carrinho');
 
@@ -38,20 +45,18 @@ function atualizarCarrinho() {
 
   lista.innerHTML = '';
 
-  let soma = 0;
+  const soma = carrinho.reduce((acc, { preco, qtd }) => acc + preco * qtd, 0);
 
-  carrinho.forEach((item) => {
+  carrinho.forEach(({ nome, preco, qtd }) => {
     const li = document.createElement('li');
 
     li.className =
       'list-group-item d-flex justify-content-between align-items-center';
 
-    const subtotal = item.preco * item.qtd;
-
-    soma += subtotal;
+    const subtotal = preco * qtd;
 
     li.innerHTML = `
-            ${item.nome} (x${item.qtd})
+            ${nome} (x${qtd})
             <span>R$ ${subtotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
         `;
 
@@ -64,7 +69,7 @@ function atualizarCarrinho() {
   });
 
   atualizarContador();
-}
+};
 
 // =============================
 // ADICIONAR PRODUTO
@@ -101,7 +106,7 @@ document.querySelectorAll('.btn-comprar').forEach((botao) => {
 // TOAST BOOTSTRAP
 // =============================
 
-function mostrarToast() {
+const mostrarToast = (): void => {
   const toastElemento = document.getElementById('toastCarrinho');
 
   if (!toastElemento) return;
@@ -109,25 +114,25 @@ function mostrarToast() {
   const toast = new bootstrap.Toast(toastElemento);
 
   toast.show();
-}
+};
 
 // =============================
 // LIMPAR CARRINHO
 // =============================
 
-function limparCarrinho() {
+const limparCarrinho = (): void => {
   carrinho = [];
 
   salvarCarrinho();
 
   atualizarCarrinho();
-}
+};
 
 // =============================
 // FINALIZAR COMPRA
 // =============================
 
-function finalizarCompra() {
+const finalizarCompra = (): void => {
   if (carrinho.length === 0) {
     alert('Seu carrinho está vazio!');
 
@@ -141,13 +146,13 @@ function finalizarCompra() {
   salvarCarrinho();
 
   atualizarCarrinho();
-}
+};
 
 // =============================
 // DEPOIMENTOS API
 // =============================
 
-async function carregarDepoimentos() {
+const carregarDepoimentos = async () => {
   const container = document.getElementById('lista-depoimentos');
 
   if (!container) return;
@@ -159,32 +164,27 @@ async function carregarDepoimentos() {
 
     const dados = await resposta.json();
 
-    dados.forEach((depoimento) => {
-      const div = document.createElement('div');
-
-      div.className = 'col-md-4';
-
-      div.innerHTML = `
-                <div class="card shadow-sm h-100">
-                    <div class="card-body">
-                        <h6 class="card-title">${depoimento.name}</h6>
-                        <p class="card-text">${depoimento.body}</p>
-                    </div>
-                </div>
-            `;
-
-      container.appendChild(div);
-    });
+    container.innerHTML = dados.map(depoimento => 
+      '<div class="col-md-4">' +
+        '<div class="card shadow-sm h-100">' +
+          '<div class="card-body">' +
+            '<h6 class="card-title">' + depoimento.name + '</h6>' +
+            '<p class="card-text">' + depoimento.body + '</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    ).join('');
   } catch (_erro) {
     container.innerHTML = 'Erro ao carregar depoimentos.';
   }
+};
 }
 
 // =============================
 // INICIALIZAÇÃO
 // =============================
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   atualizarCarrinho();
   atualizarContador();
   carregarDepoimentos();
@@ -192,12 +192,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // Reinicializar botões de compra após carregar depoimentos
   setTimeout(() => {
     document.querySelectorAll('.btn-comprar').forEach((botao) => {
-      botao.addEventListener('click', function () {
-        const nome = this.dataset.nome;
-        const preco = parseFloat(this.dataset.preco);
+      botao.addEventListener('click', () => {
+        const nome = (botao as HTMLElement).dataset.nome;
+        const preco = parseFloat((botao as HTMLElement).dataset.preco || '0');
 
-        const qtdInput = this.parentElement.querySelector('.qtd-produto');
-        const qtd = parseInt(qtdInput.value);
+        const qtdInput = (botao as HTMLElement).parentElement?.querySelector('.qtd-produto') as HTMLInputElement;
+        const qtd = parseInt(qtdInput?.value || '0');
 
         const produtoExistente = carrinho.find((item) => item.nome === nome);
 
@@ -205,9 +205,9 @@ document.addEventListener('DOMContentLoaded', function () {
           produtoExistente.qtd += qtd;
         } else {
           carrinho.push({
-            nome: nome,
-            preco: preco,
-            qtd: qtd,
+            nome,
+            preco,
+            qtd,
           });
         }
 

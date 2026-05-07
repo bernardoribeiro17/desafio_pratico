@@ -1,7 +1,7 @@
 const THEME_FALLBACK_KEY = 'tech-store-theme';
 
-function getThemeLabel(theme) {
-  const labels = {
+const getThemeLabel = (theme: string): string => {
+  const labels: Record<string, string> = {
     default: 'Azul/Laranja',
     dark: 'Escuro',
     green: 'Verde',
@@ -9,9 +9,9 @@ function getThemeLabel(theme) {
     frost: 'Frost',
   };
   return labels[theme] || 'Padrão';
-}
+};
 
-function applyFallbackTheme(theme) {
+const applyFallbackTheme = (theme: string): void => {
   const html = document.documentElement;
 
   if (theme === 'default') {
@@ -25,9 +25,9 @@ function applyFallbackTheme(theme) {
   if (switcher) {
     switcher.textContent = `🎨 Tema: ${getThemeLabel(theme)}`;
   }
-}
+};
 
-function initThemeFallback() {
+const initThemeFallback = (): void => {
   if (window.theme && typeof window.theme.set === 'function') {
     return;
   }
@@ -51,12 +51,12 @@ function initThemeFallback() {
     switcherButton.addEventListener('click', () => {
       const currentTheme =
         localStorage.getItem(THEME_FALLBACK_KEY) || 'default';
-      const themes = ['default', 'dark', 'green', 'solar', 'frost'];
+      const themes = ['default', 'dark', 'green', 'solar', 'frost'] as const;
       const nextTheme =
-        themes[(themes.indexOf(currentTheme) + 1) % themes.length];
+        themes[(themes.indexOf(currentTheme as typeof themes[number]) + 1) % themes.length];
       applyFallbackTheme(nextTheme);
     });
   }
-}
+};
 
 document.addEventListener('DOMContentLoaded', initThemeFallback);
