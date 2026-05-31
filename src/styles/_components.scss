@@ -1,0 +1,247 @@
+// =============================
+// ESTILOS DO CARD
+// =============================
+
+.card {
+  transition: all 0.3s ease;
+  border: none;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-lg;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title {
+    font-weight: $font-weight-bold;
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-base;
+  }
+
+  .card-text {
+    flex: 1;
+    font-size: $font-size-sm;
+    line-height: 1.6;
+  }
+
+  .h-100 {
+    height: 100%;
+  }
+}
+
+// =============================
+// ESTILOS DA NAVBAR
+// =============================
+
+.navbar {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: $shadow-base;
+
+  .navbar-brand {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    transition: color 0.3s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: $font-weight-normal;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-primary);
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
+
+  .badge {
+    vertical-align: middle;
+    margin-left: $spacing-sm;
+  }
+}
+
+// =============================
+// ESTILOS DE BOTÕES
+// =============================
+
+.btn {
+  font-weight: $font-weight-semibold;
+  border-radius: $border-radius-base;
+  transition: all 0.3s ease;
+  border: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  // Botões com width 100%
+  &.w-100 {
+    width: 100%;
+  }
+}
+
+.btn-primary,
+.btn-success {
+  color: $color-white;
+  font-weight: $font-weight-semibold;
+}
+
+// =============================
+// ESTILOS DE BADGE
+// =============================
+
+.badge {
+  padding: $spacing-sm $spacing-base;
+  border-radius: $border-radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+}
+
+// =============================
+// ESTILOS DE FORMULÁRIO
+// =============================
+
+.form-control,
+.form-select {
+  border-radius: $border-radius-base;
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+  }
+}
+
+.form-label {
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-sm;
+  color: var(--color-text);
+}
+
+// =============================
+// ESTILOS DE LISTA
+// =============================
+
+.list-group-item {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-background);
+  }
+}
+
+// =============================
+// ESTILOS DE MODAL/TOAST
+// =============================
+
+.toast {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: $border-radius-base;
+}
+
+.toast-header {
+  background-color: var(--color-primary);
+  color: $color-white;
+  border-bottom: 1px solid var(--color-border);
+}
+
+// =============================
+// UTILITÁRIOS ADICIONAIS
+// =============================
+
+.shadow-sm {
+  box-shadow: $shadow-sm !important;
+}
+
+.shadow {
+  box-shadow: $shadow-base !important;
+}
+
+.shadow-md {
+  box-shadow: $shadow-md !important;
+}
+
+.shadow-lg {
+  box-shadow: $shadow-lg !important;
+}
+
+.rounded {
+  border-radius: $border-radius-base !important;
+}
+
+.rounded-lg {
+  border-radius: $border-radius-lg !important;
+}
+
+// =============================
+// ANIMAÇÕES
+// =============================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+.slide-in-up {
+  animation: slideInUp 0.3s ease;
+}

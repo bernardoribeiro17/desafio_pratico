@@ -1,0 +1,50 @@
+{
+  "name": "desafio_pratico",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bernardoribeiro17/desafio_pratico.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bernardoribeiro17/desafio_pratico/issues"
+  },
+  "homepage": "https://github.com/bernardoribeiro17/desafio_pratico#readme",
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{js,html,css}": "prettier --write"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.6",
+    "eslint": "^10.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.1",
+    "sass": "^1.99.0",
+    "terser": "^5.46.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.8",
+    "@vitejs/plugin-react": "^4.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.1",
+    "bootstrap": "^5.3.8"
+  }
+}
